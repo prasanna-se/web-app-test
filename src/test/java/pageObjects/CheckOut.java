@@ -10,6 +10,8 @@ public class CheckOut {
 
     @FindBy(xpath="//button[@name=\"processCarrier\"]")
     WebElement submitShipping;
+    @FindBy(xpath="//input[@name=\"cgv\"]")
+    WebElement termsOfService;
 
 
     public CheckOut proceedFromSummarySection() {
@@ -19,6 +21,11 @@ public class CheckOut {
 
     public CheckOut proceedFromAddressSection() {
         proceedToCheckoutButton.click();
+        return this;
+    }
+
+    public CheckOut acceptTermsOfService() {
+        termsOfService.click();
         return this;
     }
 

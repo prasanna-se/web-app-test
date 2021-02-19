@@ -45,6 +45,7 @@ public class assessment extends Base {
         CheckOut checkOut = PageFactory.initElements(driver,CheckOut.class);
         checkOut.proceedFromSummarySection()
                 .proceedFromAddressSection()
+                .acceptTermsOfService()
                 .proceedFromShippingSection();
     }
 }
