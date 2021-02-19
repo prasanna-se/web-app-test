@@ -1,27 +1,22 @@
 package pageObjects;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage {
+public class MyAccount {
 
-    public WebDriver driver;
-
-    @FindBy(id = "email")
-    WebElement emailAddress;
+    @FindBy(xpath = "//*[@id=\"block_top_menu\"]/ul/li[3]/a")
+    WebElement tShirts;
 
     @FindBy(id = "passwd")
-    WebElement password;
+    WebElement orderHistoryAndDetails;
 
     @FindBy(id = "SubmitLogin")
-    WebElement signIn;
+    WebElement myPersonalInformation;
 
 
-    public void login(String email, String pass) {
-        emailAddress.sendKeys(email);
-        password.sendKeys(pass);
-        signIn.click();
+    public void selectTShirt() {
+        tShirts.click();
     }
 
 }

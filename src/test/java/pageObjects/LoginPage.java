@@ -1,28 +1,24 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
-public class Login {
-    public WebDriver driver;
+public class LoginPage {
 
-    public CheckOutPage(WebDriver driver)
-    {
-        this.driver=driver;
+    @FindBy(id = "email")
+    WebElement emailAddress;
+
+    @FindBy(id = "passwd")
+    WebElement password;
+
+    @FindBy(id = "SubmitLogin")
+    WebElement signIn;
+
+
+    public void login(String email, String pass) {
+        emailAddress.sendKeys(email);
+        password.sendKeys(pass);
+        signIn.click();
     }
 
-
-
-    By productName=By.cssSelector("p.product-name");
-
-
-
-
-
-
-    public WebElement getProductName()
-    {
-        return driver.findElement(productName);
-    }
 }
