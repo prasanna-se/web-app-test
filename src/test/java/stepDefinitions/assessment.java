@@ -3,6 +3,8 @@ package stepDefinitions;
 import com.test.prasanna.Base;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -40,7 +42,7 @@ public class assessment extends Base {
         tShirts.proceedToCheckout(driver);
     }
 
-    @And("^User does checkout$")
+    @When("^User does checkout$")
     public void userDoesCheckout() {
         CheckOut checkOut = PageFactory.initElements(driver, CheckOut.class);
         checkOut.proceedFromSummarySection()
@@ -50,6 +52,11 @@ public class assessment extends Base {
                 .payByBankWire()
                 .confirmOrder()
                 .backToOrders();
+    }
+
+    @Then("^verify order history$")
+    public void verifyOrderHistory() {
+
     }
 }
 
