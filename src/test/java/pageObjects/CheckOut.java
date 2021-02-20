@@ -3,6 +3,10 @@ package pageObjects;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class CheckOut {
 
     @FindBy(xpath = "//span[text()=\"Proceed to checkout\"]")
@@ -19,6 +23,9 @@ public class CheckOut {
 
     @FindBy(xpath = "//button[@class='button btn btn-default button-medium']")
     WebElement confirmOrderButton;
+
+    @FindBy(xpath = "//span[@class='price']/strong")
+    WebElement amount;
 
     @FindBy(xpath = "//a[@title='Back to orders']")
     WebElement backToOrders;
@@ -52,6 +59,15 @@ public class CheckOut {
     public CheckOut confirmOrder() {
         confirmOrderButton.click();
         return this;
+    }
+
+    public Double getAmount() {
+
+        ArrayList<String> dollarAmount = (ArrayList<String>) Arrays.stream(amount.getText().split(""))
+                .collect(Collectors.toList());
+        dollarAmount.remove(0);
+        return Double.parseDouble(String.join("", dollarAmount));
+
     }
 
     public void backToOrders() {

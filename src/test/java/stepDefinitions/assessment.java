@@ -6,19 +6,18 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.junit.Cucumber;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import pageObjects.CheckOut;
-import pageObjects.LoginPage;
-import pageObjects.MyAccount;
-import pageObjects.TShirts;
+import pageObjects.*;
 
 @RunWith(Cucumber.class)
 public class assessment extends Base {
 
     WebDriver webDriver;
+    Double totalPrice;
 
     @Given("^User is on the Login page$")
     public void userIsOnTheLoginPage() throws Throwable {
@@ -50,13 +49,17 @@ public class assessment extends Base {
                 .acceptTermsOfService()
                 .proceedFromShippingSection()
                 .payByBankWire()
-                .confirmOrder()
-                .backToOrders();
+                .confirmOrder();
+
+        totalPrice = checkOut.getAmount();
+        checkOut.backToOrders();
+
     }
 
     @Then("^verify order history$")
     public void verifyOrderHistory() {
-
+        OrderHistory orderHistory = PageFactory.initElements(driver, OrderHistory.class);
+        Assert.assertEquals(totalPrice, orderHistory.getTotalPriceOfOrder());
     }
 }
 
